@@ -223,9 +223,9 @@ class EditRoomDialog(QDialog):
         self.name_edit.setText(room[1])
         self.type_edit = QComboBox(self)
         self.type_edit.addItems(["lecture hall", "meeting room", "gym", "recreation room"])
-        self.type_edit.setCurrentText(room[2])  # Изменено индекс с 3 на 2, чтобы соответствовать типу
+        self.type_edit.setCurrentText(room[2])  
         self.capacity_edit = QLineEdit(self)
-        self.capacity_edit.setText(str(room[3]))  # Изменено индекс с 4 на 3, чтобы соответствовать вместимости
+        self.capacity_edit.setText(str(room[3]))  
         self.edit_button = QPushButton("Изменить", self)
         self.remove_button = QPushButton("Удалить", self)
 
@@ -297,20 +297,20 @@ class AddMeetingDialog(QDialog):  # Заменено на AddMeetingDialog
         self.add_button.clicked.connect(self.accept)
 
     def load_rooms(self):
-        self.cursor.execute("SELECT room_name, room_id FROM rooms")  # Нет изменений
+        self.cursor.execute("SELECT room_name, room_id FROM rooms")  
         rooms = self.cursor.fetchall()
         for room in rooms:
             self.room_edit.addItem(f"{room[0]} ({room[1]})")
 
     def load_teams(self):
-        self.cursor.execute("SELECT team_name FROM teams")  # Нет изменений
+        self.cursor.execute("SELECT team_name FROM teams")  
         teams = self.cursor.fetchall()
         for team in teams:
             self.team_edit.addItem(team[0])
 
     def load_team_leads(self):
         self.cursor.execute(
-            "SELECT team_lead_surname, team_lead_name, team_lead_otchestvo, team_lead_id FROM team_leads ORDER BY team_lead_id")  # Нет изменений
+            "SELECT team_lead_surname, team_lead_name, team_lead_otchestvo, team_lead_id FROM team_leads ORDER BY team_lead_id")  
         team_leads = self.cursor.fetchall()
         for team_lead in team_leads:
             team_lead_info = f"{team_lead[0]} {team_lead[1][0]}. {team_lead[2][0]}. ({team_lead[3]})"
@@ -333,7 +333,6 @@ class App(QMainWindow):
         self.setWindowTitle("Schedule")
         self.setGeometry(0, 0, 300, 200)
         self.setMinimumSize(900, 700)
-        # self.setWindowIcon(QIcon('C:/Users/ksenia/Desktop/КП БД/ПРИЛОЖЕНИЕ/icon.ico'))
 
         self.tab_widget = QTabWidget(self)
         self.setCentralWidget(self.tab_widget)
