@@ -1,0 +1,61 @@
+
+CREATE TABLE rooms (
+room_id INT PRIMARY KEY,
+room_name VARCHAR(100),
+room_type VARCHAR(100),
+room_capacity INT
+);
+
+
+CREATE TABLE team_leads (
+team_lead_id INT PRIMARY KEY,
+team_lead_name VARCHAR(100),
+team_lead_surname VARCHAR(100),
+team_lead_otchestvo VARCHAR(100),
+max_hours INT
+);
+
+CREATE TABLE teams (
+team_id INT PRIMARY KEY,
+team_name VARCHAR(100)
+);
+
+CREATE TABLE employees (
+employee_id INT PRIMARY KEY,
+employee_name VARCHAR(100),
+employee_surname VARCHAR(100),
+employee_otchestvo VARCHAR(100),
+resident BOOLEAN,
+distant_work_format BOOLEAN,
+team_id INT,
+FOREIGN KEY (team_id) REFERENCES teams(team_id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE room_busyness (
+id SERIAL PRIMARY KEY,
+room_id INT,
+date DATE,
+time TIME,
+FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE CASCADE
+);
+
+CREATE TABLE team_lead_busyness (
+id SERIAL PRIMARY KEY,
+team_lead_id INT,
+date DATE,
+time TIME,
+FOREIGN KEY (team_lead_id) REFERENCES team_leads(team_lead_id) ON DELETE CASCADE
+);
+
+CREATE TABLE schedule (
+date DATE,
+time TIME,
+room_id INT,
+team_lead_id INT,
+team_id INT,
+type VARCHAR(100),
+FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE CASCADE,
+FOREIGN KEY (team_lead_id) REFERENCES team_leads(team_lead_id) ON DELETE CASCADE,
+FOREIGN KEY (team_id) REFERENCES teams(team_id) ON DELETE CASCADE
+);

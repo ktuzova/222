@@ -1,0 +1,18 @@
+CREATE OR REPLACE FUNCTION check_max_hours()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	IF NEW.max_hours < 1 THEN
+		RAISE EXCEPTION 'Значение max_hours должно быть >= 1';
+	END IF;
+
+	RETURN NEW;
+
+END;
+$$;
+
+CREATE TRIGGER team_leads_trigger
+BEFORE INSERT OR UPDATE ON team_leads
+FOR EACH ROW
+EXECUTE FUNCTION check_max_hours();

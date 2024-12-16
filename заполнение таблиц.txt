@@ -1,0 +1,58 @@
+INSERT INTO rooms (room_id, room_name, room_type, room_capacity)
+VALUES (201, '1', 'meeting room', 10),
+       (202, '2', 'meeting room', 15),
+       (203, '3', 'recreation room', 25),
+       (204, '4', 'meeting room', 20),
+       (205, '5', 'lecture hall', 100),
+       (206, '6', 'meeting room', 30),
+       (207, '7', 'gym', 50);
+
+      
+INSERT INTO teams (team_id, team_name)
+VALUES (1, 'backend'),
+       (2, 'frontend'),
+       (3, 'analytics'),
+       (4, 'managers');
+      
+
+INSERT INTO employees (employee_id , employee_name , employee_surname , employee_otchestvo , resident , distant_work_format , team_id)
+VALUES (10, 'Ksenia', 'Tuzova', 'Kirillovna', TRUE, FALSE, 1),
+       (11, 'Ivan', 'Krasnov', 'Vladimirovich', FALSE, TRUE, 1),
+       (12, 'Lev', 'Filonenko', 'Alexeevich', FALSE, TRUE, 1),
+       (13, 'Semyon', 'Krugkov', 'Ivanovich', TRUE, TRUE, 1),
+       (14, 'Marat', 'Petrushevskiy', 'Sergeevich', FALSE, TRUE, 1),
+       (15, 'Timur', 'Kubanov', 'Sergeevich', TRUE, TRUE, 2),
+       (16, 'Georgiy', 'Alexeev', 'Ivanovich', FALSE, TRUE, 2),
+       (17, 'Vladimir', 'Sanin', 'Grigorevich', TRUE, TRUE, 2),
+       (18, 'Vladislav', 'Fomichov', 'Vladimirovich', FALSE, TRUE, 2),
+       (19, 'Oleg', 'Sidorov', 'Alexeevich', TRUE, TRUE, 2),
+       (20, 'Alisa', 'Furova', 'Egorovna', FALSE, TRUE, 2),
+       (21, 'Kirill', 'Bistrov', 'Sergeevich', TRUE, TRUE, 3),
+       (22, 'Alexey', 'Voropaev', 'Vladimirovich', FALSE, TRUE, 3),
+       (23, 'Evgeniy', 'Grishin', 'Vladimirovich', FALSE, TRUE, 3),
+       (24, 'Ivan', 'Mozgovoy', 'Sergeevich', TRUE, TRUE, 3),
+       (25, 'Anton', 'Gorohov', 'Alexeevich', FALSE, TRUE, 3),
+       (26, 'Vasiliy', 'Mamin', 'Отчество 2', TRUE, TRUE, 4),
+       (27, 'Rodion', 'Rogov', 'Vladimirovich', FALSE, TRUE, 4),
+       (28, 'Igor', 'Mitrukov', 'Ivanovich', TRUE, TRUE, 4),
+       (29, 'Yan', 'Bagarov', 'Sergeevich', FALSE, TRUE, 4),
+       (30, 'Kirill', 'Radaev', 'Ivanovich', TRUE, TRUE, 4);
+      
+      
+INSERT INTO team_leads (team_lead_id , team_lead_name , team_lead_surname , team_lead_otchestvo , max_hours)
+VALUES (100, 'Viktor', 'Gubin', 'Valerevich', 20),
+       (101, 'Vladimir', 'Ozerchenko', 'Volfovich', 15),
+       (102, 'Valentina', 'Fyodorova', 'Evgenevna', 15),
+       (103, 'Roman', 'Zaykin', 'Sergeevich', 17),
+       (104, 'Ruslan', 'Mishin', 'Viktorovich', 20),
+       (105, 'Roza', 'Kostrova', 'Eduardovna', 10),
+       (106, 'Natalia', 'Tuzova', 'Alexeevna', 15),
+       (107, 'Egor', 'Romanov', 'sergeevich', 15),
+       (108, 'Ruslan', 'Khanaliev', 'vladimirovich', 20),
+       (109, 'Sergey', 'Nagiev', 'Lvov', 20),
+       (110, 'Elena', 'Pyankova', 'Alexandrovna', 17),
+       (111, 'Eva', 'Grishina', 'Igorevna', 15),
+       (112, 'Nikolay', 'Sheremetev', 'Kirillovich', 18);
+      
+      
+

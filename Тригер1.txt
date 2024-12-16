@@ -1,0 +1,23 @@
+CREATE OR REPLACE FUNCTION check_team_lead_hours()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+DECLARE
+	team_lead_hours INT;
+BEGIN
+	SELECT COUNT(*) INTO team_lead_hours
+	FROM schedule
+	WHERE team_lead_id = NEW.team_lead_id;
+
+	IF team_lead_hours >= (SELECT max_hours FROM team_leads WHERE team_lead_id = NEW.team_lead_id) THEN
+		RAISE EXCEPTION 'Тимлид уже достиг максимального количесва частов';
+	END IF;
+
+	RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER schedule_trigger
+BEFORE INSERT ON schedule
+FOR EACH ROW
+EXECUTE FUNCTION check_team_lead_hours();

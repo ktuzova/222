@@ -1,0 +1,19 @@
+CREATE OR REPLACE FUNCTION delete_busyness_entries()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	DELETE FROM team_lead_busyness
+	WHERE team_lead_id = OLD.team_lead_id AND date = OLD.date AND time = OLD.time;
+
+	DELETE FROM room_busyness
+	WHERE room_id = OLD.room_id AND date = OLD.date AND time = OLD.time;
+
+	RETURN OLD;
+END;
+$$;
+
+CREATE TRIGGER schedule_delete_trigger
+AFTER DELETE ON schedule
+FOR EACH ROW
+EXECUTE FUNCTION delete_busyness_entries();

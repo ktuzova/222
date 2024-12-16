@@ -1,0 +1,14 @@
+CREATE OR REPLACE FUNCTION get_team_lead_hours(p_team_lead_id INT)
+RETURNS INT
+LANGUAGE plpgsql
+AS $$
+	DECLARE
+		team_lead_hours INT;
+	BEGIN
+		SELECT COUNT(*) INTO team_lead_hours
+		FROM team_lead_busyness
+		WHERE team_lead_id = p_team_lead_id;
+
+		RETURN team_lead_hours;
+	END;
+$$;

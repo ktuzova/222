@@ -1,0 +1,27 @@
+CREATE OR REPLACE PROCEDURE add_to_schedule(
+	v_date DATE,
+	v_time TIME,
+	v_room_id INT,
+	v_team_lead_id INT,
+	v_team_id INT,
+	v_type VARCHAR
+)
+LANGUAGE plpgsql
+AS $$
+	BEGIN
+		IF EXISTS (SELECT 1 FROM team_lead_busyness WHERE team_lead_id = v_team_lead_id AND date = v_date AND time = v_time)THEN
+			RAISE EXCEPTION 'Тимлид занят в указанное время';
+		ELSIF EXISTS(SELECT 1 FROM room_busyness WHERE room_id =v_room_id AND date =v_date AND time = v_time) THEN
+			RAISE EXCEPTION 'Комната занята в указанное время';
+		ELSE
+			INSERT INTO schedule (date, time, room_id, team_lead_id, team_id, type)
+			VALUES (v_date,v_time, v_room_id, v_team_lead_id, v_team_id, v_type);
+
+			INSERT INTO team_lead_busyness (team_lead_id,date, time)
+			VALUES (v_team_lead_id, v_date, v_time);
+
+			INSERT INTO room_busyness (room_id,date, time)
+			VALUES (v_room_id, v_date, v_time);
+		END IF;
+	END;
+$$;
